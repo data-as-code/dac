@@ -3,7 +3,7 @@ run-name: New docs page is about to be published 📔
 on:
   push:
     branches:
-      - docs
+      - main
 permissions:
   contents: write
 jobs:
