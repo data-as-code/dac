@@ -1,6 +1,13 @@
 name: Test DaC
 run-name: ${{ github.actor }} is testing out dac 🚀
-on: [push]
+on: 
+  push:
+    paths:
+      - src/*
+      - test/*
+      - pyproject.toml
+      - requirements-test.txt
+      - .pre-commit-config.yaml
 jobs:
   check-style:
     runs-on: ubuntu-latest
@@ -41,7 +48,7 @@ jobs:
       run: |
         python -m venv venv || . venv/bin/activate
         pip install -U pip wheel setuptools
-        pip install -r requirements-dev.txt
+        pip install -r requirements-test.txt
     - name: Script 🏃‍♂️
       run: |
         pytest test --run-slow

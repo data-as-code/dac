@@ -4,9 +4,9 @@ on:
   workflow_run:
      workflows: ["Test DaC"]
      types: ["completed"]
-  # push:
-  #   tags:
-  #     - v*
+  push:
+    tags:
+      - v*
 jobs:
   release:
     runs-on: ubuntu-latest
