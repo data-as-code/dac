@@ -1,0 +1,27 @@
+name: Deploy DaC package
+run-name: ${{ github.actor }} is releasing dac ${{ github.ref }} 🚀
+on:
+  push:
+    tags:
+      - v*
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout 🔖
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+    - name: Setup python 🐍
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+    - name: Before script 🙆‍♂️
+      run: |
+        python -m venv venv || . venv/bin/activate
+        pip install -U pip wheel setuptools build twine
+    - name: Script 🏃‍♂️
+      run: |
+        python -m build
+        TWINE_PASSWORD=${TWINE_PASSWORD} TWINE_USERNAME=${TWINE_USER} python -m twine upload --repository-url ${TWINE_REPO_URL} dist/*
+    if: github.event_name == 'release' && github.event.action == 'created'
