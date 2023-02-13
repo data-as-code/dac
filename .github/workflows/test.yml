@@ -1,4 +1,4 @@
-name: py-dac actions
+name: Test DaC
 run-name: ${{ github.actor }} is testing out dac 🚀
 on: [push]
 jobs:
@@ -27,7 +27,7 @@ jobs:
       run: |
         pre-commit run
   test:
-    runs-on: ubuntu-latest
+    runs-on: "${{ matrix.os }}"
     steps:
     - name: Checkout 🔖
       uses: actions/checkout@v3
@@ -52,4 +52,5 @@ jobs:
         pytest test --run-slow
     strategy:
       matrix:
+        os: ["ubuntu-latest", "macos-latest", "windows-latest"]
         version: ["3.9", "3.10", "3.11"]
