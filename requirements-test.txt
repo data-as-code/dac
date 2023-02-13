@@ -1,0 +1,5 @@
+-e .
+pandas~=1.5
+pandera~=0.13
+pyarrow
+pytest~=7.2

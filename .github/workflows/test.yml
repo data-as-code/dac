@@ -41,7 +41,7 @@ jobs:
       run: |
         python -m venv venv || . venv/bin/activate
         pip install -U pip wheel setuptools
-        pip install -r requirements-dev.txt
+        pip install -r requirements-test.txt
     - name: Script 🏃‍♂️
       run: |
         pytest test --run-slow

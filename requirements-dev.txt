@@ -1,7 +1,4 @@
--e .
 mypy~=0.991
-pandas~=1.5
-pandera~=0.13
 pre-commit~=2.21
-pyarrow
-pytest~=7.2
+-r requirements-test.txt
+-r requirements-doc.txt

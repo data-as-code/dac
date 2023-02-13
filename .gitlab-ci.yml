@@ -19,7 +19,7 @@ test:
   stage: verification
   before_script:
     - pip install -U pip wheel setuptools
-    - pip install -r requirements-dev.txt
+    - pip install -r requirements-test.txt
   script:
     - pytest test --run-slow
   parallel:
