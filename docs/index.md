@@ -1,13 +1,13 @@
 # `dac`: Data as Code
 
 <div align="center">
-  <img src="doc/img/motto.png" alt="drawing" width="450"/>
+  <img src="img/motto.png" alt="drawing" width="450"/>
 </div>
 
 Data-as-Code (DaC) `dac` is a tool that supports the distribution of data as (python) code.
 
 <div align="center">
-  <img src="doc/img/logo.jpg" alt="drawing" width="250"/>
+  <img src="img/logo.jpg" alt="drawing" width="250"/>
 </div>
 
 
