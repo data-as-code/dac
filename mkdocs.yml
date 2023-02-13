@@ -1,11 +1,10 @@
 site_name: Data Science Workstation Wiki
 
 repo_url: https://github.com/data-as-code/py-dac
-edit_uri: edit/main/docs/
+edit_uri: tree/main/doc
 
 nav:
   - Home: index.md
-
 
 theme:
   name: material
