@@ -1,4 +1,5 @@
 name: Publish MkDocs website
+run-name: New docs page is about to be published 📔
 on:
   push:
     branches:
