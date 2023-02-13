@@ -1,4 +1,4 @@
-name: Deploy DaC package
+name: Publish DaC package
 run-name: ${{ github.actor }} is releasing dac ${{ github.ref }} 🚀
 on:
   push:
