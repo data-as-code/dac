@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="doc/img/motto.png" alt="drawing" width="450"/>
+  <img src="docs/img/motto.png" alt="drawing" width="450"/>
 </div>
 
 # `dac`: Data as Code
@@ -7,7 +7,7 @@
 Data-as-Code (DaC) `dac` is a tool that supports the distribution of data as (python) code.
 
 <div align="center">
-  <img src="doc/img/logo.jpg" alt="drawing" width="250"/>
+  <img src="docs/img/logo.jpg" alt="drawing" width="250"/>
 </div>
 
 
