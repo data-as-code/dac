@@ -1,0 +1,68 @@
+[project]
+name = "dac"
+dynamic = ["version"]
+description = "Tool to distribute data as code"
+readme = "README.md"
+requires-python = ">=3.9,<3.12"
+license = {text = "MIT"}
+authors = [
+  {name = "Francesco Calcavecchia", email = "francesco086@gmail.com"}
+]
+maintainers = [
+  {name = "Francesco Calcavecchia", email = "francesco086@gmail.com"}
+]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Topic :: Software Development :: Build Tools",
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Scientific/Engineering",
+  "Operating System :: OS Independent"
+]
+
+dependencies = [
+  "build~=0.9",
+  "pydantic~=1.10",
+  "toml~=0.10",
+  "typer[all]~=0.7",
+  "wheel~=0.38"
+]
+
+# [project.optional-dependencies]
+#
+
+# [project.urls]
+# homepage = "https://example.com"
+# documentation = "https://readthedocs.org"
+# repository = "https://github.com"
+# changelog = "https://github.com/me/spam/blob/master/CHANGELOG.md"
+
+[project.scripts]
+dac = "dac._cli:app"
+
+[build-system]
+requires = [
+    "setuptools>=45",
+    "wheel",
+    "setuptools_scm[toml]>=6.2"
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+
+[tool.isort]
+profile = "black"
+line_length = 120
+
+[tool.black]
+line-length = 120
+
+[tool.pylint."messages control"]
+disable = [
+    "line-too-long",
+    "missing-module-docstring",
+    "missing-class-docstring",
+    "missing-function-docstring",
+    "wrong-import-order"
+]

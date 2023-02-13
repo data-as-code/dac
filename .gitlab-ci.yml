@@ -1,0 +1,44 @@
+image: python:3.11
+
+stages:
+  - verification
+  - deployment
+
+
+check style:
+  stage: verification
+  before_script:
+    - pip install -U pip wheel setuptools pre-commit
+    - pre-commit install
+  script:
+    - pre-commit run
+
+
+test:
+  image: $image
+  stage: verification
+  before_script:
+    - pip install -U pip wheel setuptools
+    - pip install -r requirements-dev.txt
+  script:
+    - pytest test --run-slow
+  parallel:
+    matrix:
+      - image:
+        - "python:3.9"
+        - "python:3.10"
+        - "python:3.11"
+
+
+deploy package:
+  stage: deployment
+  before_script:
+    - pip install -U pip wheel setuptools build twine
+  script:
+    - python -m build
+    - TWINE_PASSWORD=${TWINE_PASSWORD} TWINE_USERNAME=${TWINE_USER} python -m twine upload --repository-url ${TWINE_REPO_URL} dist/*
+  artifacts:
+    paths:
+      - dist
+  only:
+    - tags

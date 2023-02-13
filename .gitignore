@@ -1,0 +1,11 @@
+.DS_Store
+.python-version
+venv
+__pycache__
+.mypy_cache
+.pytest_cache
+.vscode
+*.egg-info
+src/**/*.parquet
+.env
+*.whl
