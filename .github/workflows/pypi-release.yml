@@ -1,9 +1,12 @@
 name: Publish DaC package
 run-name: ${{ github.actor }} is releasing dac ${{ github.ref }} 🚀
 on:
-  push:
-    tags:
-      - v*
+  workflow_run:
+     workflows: ["Test DaC"]
+     types: ["completed"]
+  # push:
+  #   tags:
+  #     - v*
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -23,5 +26,5 @@ jobs:
     - name: Script 🏃‍♂️
       run: |
         python -m build
-        TWINE_PASSWORD=${TWINE_PASSWORD} TWINE_USERNAME=${TWINE_USER} python -m twine upload --repository-url ${TWINE_REPO_URL} dist/*
-    if: github.event_name == 'release' && github.event.action == 'created'
+        echo "Success!"
+        # TWINE_PASSWORD=${TWINE_PASSWORD} TWINE_USERNAME=${TWINE_USER} python -m twine upload --repository-url ${TWINE_REPO_URL} dist/*
