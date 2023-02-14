@@ -11,7 +11,7 @@ Data-as-Code (DaC) `dac` is a tool that supports the distribution of data as (py
 </div>
 
 
-📔 [User documentation](https://data-as-code.github.io/dac/)
+## 📔 [User documentation](https://data-as-code.github.io/dac/)
 
 
 ## Setup development environment (for contributors only)
