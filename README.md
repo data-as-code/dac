@@ -16,17 +16,16 @@ Data-as-Code (DaC) `dac` is a tool that supports the distribution of data as (py
 
 ## Setup development environment (for contributors only)
 
-* Create a virtual environment and activate it (if you have [pyenv](https://github.com/pyenv/pyenv) installed the
-  version of python will be automatically set, otherwise refer to the file `.python-version`)
+* Create a virtual environment and activate it
   ```shell
   python -m venv venv
-  source venv/bin/activate
+  . venv/bin/activate
   ```
 
-* Install the developer dependencies you will need
+* Install the developer dependencies
   ```shell
   python -m pip install -U pip wheel setuptools
-  python -m pip install requirements-dev.txt
+  python -m pip install -r requirements-dev.txt
   ```
 
 * Enable the pre-commits
@@ -34,7 +33,8 @@ Data-as-Code (DaC) `dac` is a tool that supports the distribution of data as (py
   pre-commit install
   ```
 
-* To run the tests
+* To run all the tests
   ```shell
-  python -m unittest discover test
+  pytest --run-slow
   ```
+  (omit `--run-slow` to run only the fast unit tests)
