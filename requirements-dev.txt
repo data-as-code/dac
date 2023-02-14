@@ -1,4 +1,4 @@
 mypy~=0.991
 pre-commit~=2.21
 -r requirements-test.txt
--r requirements-doc.txt
+-r requirements-docs.txt
