@@ -1,6 +1,6 @@
-site_name: Data Science Workstation Wiki
+site_name: Data as Code
 
-repo_url: https://github.com/data-as-code/py-dac
+repo_url: https://github.com/data-as-code/dac
 edit_uri: tree/main/doc
 
 nav:
