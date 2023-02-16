@@ -63,9 +63,9 @@ On a high level, the most important elements you must provide are:
 
 * Semantic versioning can be used to communicate significat changes:
 
-  * a patch update corresponds to a fix in the data: its intended content is unchanged
-  * a minor update corresponds to a change in the data that does not break the schema
-  * a major update corresponds to a change in the schema, or any other breaking change
+    * a patch update corresponds to a fix in the data: its intended content is unchanged
+    * a minor update corresponds to a change in the data that does not break the schema
+    * a major update corresponds to a change in the schema, or any other breaking change
 
   In this way data pipelines can subscribe to the appropriate updates. Furthermore, it will be easy to keep releasing data updates maintaining retro-compatibility (one can keep deploying `1.X.Y` updates even after version `2` has been rolled-out).
 
