@@ -12,11 +12,6 @@ repos:
       - id: check-json
       - id: check-toml
       - id: check-yaml
-  - repo: https://github.com/pycqa/isort
-    rev: 5.11.5
-    hooks:
-      - id: isort
-        name: isort (python)
   - repo: https://github.com/psf/black
     rev: 23.1.0
     hooks:
@@ -27,22 +22,13 @@ repos:
     hooks:
       - id: mypy
         exclude: test/data/schema/wrong_syntax.py
-  - repo: https://github.com/pre-commit/mirrors-pylint
-    rev: v2.7.4
-    hooks:
-    - id: pylint
-      exclude: test/data/schema/wrong_syntax.py
-      args:
-        - --disable=E0401,C0103,R0903,R0801,R0913
   - repo: https://github.com/dosisod/refurb
     rev: v1.11.1
     hooks:
       - id: refurb
         exclude: test/data/schema/wrong_syntax.py
-  - repo: https://github.com/pycqa/flake8
-    rev: 6.0.0
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: 'v0.0.247'
     hooks:
-      - id: flake8
-        exclude: test/data/schema/wrong_syntax.py
-        args:
-          - --max-line-length=120
+    - id: ruff
+      args: [--fix, --exit-non-zero-on-fix]
