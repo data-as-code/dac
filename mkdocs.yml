@@ -5,6 +5,7 @@ edit_uri: tree/main/doc
 
 nav:
   - Home: index.md
+  - Examples: examples.md
 
 theme:
   name: material
@@ -26,7 +27,7 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg  
+      emoji_generator: !!python/name:materialx.emoji.to_svg
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
