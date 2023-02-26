@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="docs/img/motto.png" alt="drawing" width="450"/>
+  <img src="https://data-as-code.github.io/dac/img/motto.png" width="450"/>
 </div>
 
 # `dac`: Data as Code
@@ -7,8 +7,11 @@
 Data-as-Code (DaC) `dac` is a tool that supports the distribution of data as (python) code.
 
 <div align="center">
-  <img src="docs/img/logo.jpg" alt="drawing" width="250"/>
+  <img src="https://data-as-code.github.io/dac/img/logo.jpg" width="250"/>
 </div>
+
+**IMPORTANT**: Currently the project is in the initial development phase, this is why releases are marked as `0.z.y`.
+(following [semantic versioning 2.0.0](https://semver.org/): "Major version zero (0.y.z) is for initial development. Anything MAY change at any time. The public API SHOULD NOT be considered stable.")
 
 
 ## 📔 [User documentation](https://data-as-code.github.io/dac/)
