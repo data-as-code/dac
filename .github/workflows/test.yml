@@ -1,6 +1,6 @@
 name: Test DaC
 run-name: ${{ github.actor }} is testing out dac 🚀
-on: 
+on:
   push:
     paths:
       - src/*
@@ -35,6 +35,10 @@ jobs:
         pre-commit run
   test:
     runs-on: "${{ matrix.os }}"
+    strategy:
+      matrix:
+        os: ["ubuntu-latest"]
+        version: ["3.9", "3.10", "3.11"]
     steps:
     - name: Checkout 🔖
       uses: actions/checkout@v3
@@ -52,7 +56,3 @@ jobs:
     - name: Script 🏃‍♂️
       run: |
         pytest test --run-slow
-    strategy:
-      matrix:
-        os: ["ubuntu-latest"]
-        version: ["3.9", "3.10", "3.11"]
