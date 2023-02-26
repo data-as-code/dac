@@ -3,13 +3,13 @@ name = "dac"
 dynamic = ["version"]
 description = "Tool to distribute data as code"
 readme = "README.md"
-requires-python = ">=3.9,<3.12"
+requires-python = ">=3.9"
 license = {text = "MIT"}
 authors = [
-  {name = "Francesco Calcavecchia", email = "francesco086@gmail.com"}
+  {name = "Francesco Calcavecchia", email = "francesco.calcavecchia@gmail.com"}
 ]
 maintainers = [
-  {name = "Francesco Calcavecchia", email = "francesco086@gmail.com"}
+  {name = "Francesco Calcavecchia", email = "francesco.calcavecchia@gmail.com"}
 ]
 classifiers = [
   "Programming Language :: Python :: 3",
@@ -32,11 +32,11 @@ dependencies = [
 # [project.optional-dependencies]
 #
 
-# [project.urls]
-# homepage = "https://example.com"
-# documentation = "https://readthedocs.org"
-# repository = "https://github.com"
-# changelog = "https://github.com/me/spam/blob/master/CHANGELOG.md"
+[project.urls]
+homepage = "https://data-as-code.github.io/dac/"
+documentation = "https://data-as-code.github.io/dac/"
+repository = "https://github.com/data-as-code/dac"
+changelog = "https://github.com/data-as-code/dac/blob/main/CHANGELOG.md"
 
 [project.scripts]
 dac = "dac._cli:app"
