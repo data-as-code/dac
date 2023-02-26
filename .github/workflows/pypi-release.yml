@@ -24,7 +24,9 @@ jobs:
         python -m venv venv || . venv/bin/activate
         pip install -U pip wheel setuptools build twine
     - name: Script 🏃‍♂️
+      env:
+        TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
+        TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
       run: |
         python -m build
-        echo "Success!"
-        # TWINE_PASSWORD=${TWINE_PASSWORD} TWINE_USERNAME=${TWINE_USER} python -m twine upload --repository-url ${TWINE_REPO_URL} dist/*
+        python -m twine upload dist/*
