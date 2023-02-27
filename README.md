@@ -11,7 +11,9 @@ Data-as-Code (DaC) `dac` is a tool that supports the distribution of data as (py
 </div>
 
 **IMPORTANT**: Currently the project is in the initial development phase, this is why releases are marked as `0.z.y`.
-(following [semantic versioning 2.0.0](https://semver.org/): "Major version zero (0.y.z) is for initial development. Anything MAY change at any time. The public API SHOULD NOT be considered stable.")
+(following [semantic versioning 2.0.0](https://semver.org/): "Major version zero (0.y.z) is for initial development.
+Anything MAY change at any time. The public API SHOULD NOT be considered stable.").
+While in this phase, we will denote breaking changes with a minor increase.
 
 
 ## 📔 [User documentation](https://data-as-code.github.io/dac/)
