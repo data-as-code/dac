@@ -1,0 +1,104 @@
+name: dac actions
+run-name: ${{ github.actor }} triggered the actions (${{ github.event_name }} - ${{ github.ref }})
+
+on:
+  push:
+    branches:
+      - '*'
+    tags:
+      - '*'
+
+jobs:
+
+  check-style:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout 🔖
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+    - name: Setup python 🐍
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    - name: Setup cache 💾
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pre-commit
+        key: pre-commit
+    - name: Prepare pre-commit 🙆‍♂️👗
+      run: |
+        python -m venv venv || . venv/bin/activate
+        pip install -U pip wheel setuptools pre-commit
+        pre-commit install
+    - name: Run pre-commit 👗🚀
+      run: |
+        pre-commit run
+
+  test:
+    runs-on: "${{ matrix.os }}"
+    strategy:
+      matrix:
+        os: ["ubuntu-latest"]
+        version: ["3.9", "3.10", "3.11"]
+    steps:
+    - name: Checkout 🔖
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+    - name: Setup python 🐍
+      uses: actions/setup-python@v4
+      with:
+        python-version: "${{ matrix.version }}"
+    - name: Prepare tests 🙆‍♂️🔬
+      run: |
+        python -m venv venv || . venv/bin/activate
+        pip install -U pip wheel setuptools
+        pip install -r requirements-test.txt
+    - name: Run tests 🔬🚀
+      run: |
+        pytest test --run-slow
+
+  docs:
+    needs: [test, check-style]
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🔖
+        uses: actions/checkout@v3
+      - name: Setup python 🐍
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+      - name: Build and push docs 📔🚀
+        run: |
+          pip install -r requirements-docs.txt
+          mkdocs gh-deploy --force
+
+  pypi-release:
+    needs: [test, check-style]
+    if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout 🔖
+      if: ${{ github.event_name == 'release' }}
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+    - name: Setup python 🐍
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+    - name: Prepare release 🙆‍♂️📦test
+      run: |
+        python -m venv venv || . venv/bin/activate
+        pip install -U pip wheel setuptools build twine
+    - name: Build 🛠️📦
+      run: |
+        python -m build
+    - name: Release 📦🚀
+      env:
+        TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
+        TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
+      run: |
+        python -m twine upload dist/*
