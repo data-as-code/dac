@@ -1,5 +1,4 @@
 name: dac actions
-run-name: ${{ github.actor }} triggered the actions (${{ github.event_name }} - ${{ github.ref }})
 
 on:
   push:
