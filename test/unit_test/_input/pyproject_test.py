@@ -2,7 +2,6 @@ from test.data import get_path_to_parquet_as_pandas_requirements
 
 import pytest
 import toml  # type: ignore
-
 from dac._input.pyproject import PyProjectConfig
 
 
@@ -11,7 +10,9 @@ def test_if_dependencies_are_passed_as_comma_separated_then_valid_pyproject_is_p
     project_name: str, project_version: str
 ):
     pm = PyProjectConfig(
-        project_name=project_name, project_version=project_version, project_dependencies="pandas,adlfs, pyarrow"
+        project_name=project_name,
+        project_version=project_version,
+        project_dependencies="pandas;adlfs; pyarrow",
     )
     toml_content = pm.generate_pyproject_toml()
     parsed_toml = toml.loads(toml_content)
@@ -46,7 +47,11 @@ def test_if_dependencies_are_passed_from_cat_requirements_then_valid_pyproject_i
 )
 def test_if_invalid_project_name_then_raise_error(name: str):
     with pytest.raises(ValueError) as e:
-        PyProjectConfig(project_name=name, project_version="0.1.2", project_dependencies="pandas,adlfs,pyarrow")
+        PyProjectConfig(
+            project_name=name,
+            project_version="0.1.2",
+            project_dependencies="pandas,adlfs,pyarrow",
+        )
     assert "Invalid project name" in str(e.value)
 
 
@@ -55,4 +60,8 @@ def test_if_invalid_project_name_then_raise_error(name: str):
     ["valid", "va_lid"],
 )
 def test_if_valid_project_name_then_dont_raise_error(name: str):
-    PyProjectConfig(project_name=name, project_version="0.1.2", project_dependencies="pandas,adlfs,pyarrow")
+    PyProjectConfig(
+        project_name=name,
+        project_version="0.1.2",
+        project_dependencies="pandas,adlfs,pyarrow",
+    )
