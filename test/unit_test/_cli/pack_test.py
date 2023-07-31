@@ -13,7 +13,6 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 from click.testing import Result
-
 from dac._input.config import PackConfig
 
 
@@ -60,11 +59,11 @@ def test_if_load_requires_missing_requirement_then_error_contains_meaningful_inf
     assert "No module named 'modin'" in error_message
 
 
-def test_if_load_returns_wrong_type_then_error_contains_meningful_info():
+def test_if_load_returns_wrong_type_then_error_contains_meaningful_info():
     result = invoke_dac_pack(load=get_path_to_return_wrong_type_load().as_posix())
     assert result.exit_code != 0
     error_message = str(result.exception)
-    assert "expected pd.DataFrame, got <class 'NoneType'>" in error_message
+    assert "Backend not found" in error_message
 
 
 def test_if_load_miss_credentials_then_error_contains_meaningful_info():

@@ -2,4 +2,4 @@ import pandas as pd
 
 
 def load() -> pd.DataFrame:
-    pass
+    return {"a": 1}
