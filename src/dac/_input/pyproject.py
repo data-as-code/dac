@@ -1,7 +1,7 @@
 from typing import List
 
 import toml  # type: ignore
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, field_validator
 
 
 class PyProjectConfig(BaseModel):
@@ -9,7 +9,8 @@ class PyProjectConfig(BaseModel):
     project_version: str
     project_dependencies: str
 
-    @validator("project_name")
+    @field_validator("project_name")
+    @classmethod
     def valid_project_name(cls, name: str) -> str:  # pylint: disable=no-self-argument,no-self-use
         if not name.isidentifier() or "\xb7" in name:
             raise ValueError(f"Invalid project name: {name} (hint: only '_' are allowed, no '-')")
