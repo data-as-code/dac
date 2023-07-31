@@ -23,7 +23,7 @@ classifiers = [
 
 dependencies = [
   "build~=0.9",
-  "pydantic~=2.1",
+  "pydantic>=1.10,<3.0",
   "toml~=0.10",
   "typer[all]~=0.7",
   "wheel~=0.38"

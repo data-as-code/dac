@@ -63,7 +63,6 @@ def test_if_load_returns_wrong_type_then_error_contains_meaningful_info():
     result = invoke_dac_pack(load=get_path_to_return_wrong_type_load().as_posix())
     assert result.exit_code != 0
     error_message = str(result.exception)
-    assert "Backend not found for backend" in error_message
     assert "pandas" in error_message
 
 
