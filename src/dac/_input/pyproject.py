@@ -1,8 +1,34 @@
-import pydantic
+from dataclasses import dataclass
+from typing import List
 
-if pydantic.__version__ >= "2.0.0":
-    from dac._input._pyproject_pydantic_v2 import PyProjectConfig  # noqa: F401 # type: ignore
-elif pydantic.__version__ >= "1.0.0":
-    from dac._input._pyproject_pydantic_v1 import PyProjectConfig  # noqa: F401
-else:
-    raise RuntimeError(f"Unsupported pydantic version: {pydantic.__version__}")
+import toml  # type: ignore
+
+
+@dataclass
+class PyProjectConfig:
+    project_name: str
+    project_version: str
+    project_dependencies: str
+
+    def __post_init__(self):
+        self._valid_project_name()
+
+    def _valid_project_name(self) -> None:
+        if not self.project_name.isidentifier() or "\xb7" in self.project_name:
+            raise ValueError(f"Invalid project name: {self.project_name} (hint: only '_' are allowed, no '-')")
+
+    def generate_pyproject_toml(self) -> str:
+        return toml.dumps(
+            {
+                "project": {
+                    "name": self.project_name,
+                    "version": self.project_version,
+                    "dependencies": self._get_list_of_project_dependencies(),
+                }
+            }
+        )
+
+    def _get_list_of_project_dependencies(self) -> List[str]:
+        splitted_by_newline = self.project_dependencies.splitlines()
+        splitted_by_newline_or_comma = [s for ss in splitted_by_newline for s in ss.split(";")]
+        return sorted(map(lambda x: x.strip(), splitted_by_newline_or_comma))
