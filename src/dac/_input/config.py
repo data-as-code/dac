@@ -21,16 +21,16 @@ class PackConfig:
 
     def __post_init__(self):
         map(PackConfig._check_path_exists, (self.load_path, self.schema_path, self.wheel_dir, self.data_path))
-        self._load_contains_expected_function()
-        self._schema_contains_expected_class()
-        self._schema_match_data()
+        self._check_load_contains_expected_function()
+        self._check_schema_contains_expected_class()
+        self._check_schema_match_data()
 
     @staticmethod
     def _check_path_exists(path: Optional[Path]) -> None:
         if path is not None and not path.exists():
             raise ValueError((f"Path {path.as_posix()} is not valid"))
 
-    def _load_contains_expected_function(self) -> None:
+    def _check_load_contains_expected_function(self) -> None:
         try:
             sys.path.append(self.load_path.parent.as_posix())
             pkg = importlib.import_module(name=self.load_path.stem)
@@ -50,7 +50,7 @@ class PackConfig:
         except Exception as e:
             raise ValueError((f"{self.load_path.as_posix()} does not contain the required `def load()`")) from e
 
-    def _schema_contains_expected_class(self) -> None:
+    def _check_schema_contains_expected_class(self) -> None:
         try:
             sys.path.append(self.schema_path.parent.as_posix())
             pkg = importlib.import_module(name=self.schema_path.stem)
@@ -71,7 +71,7 @@ class PackConfig:
                 (f"{self.schema_path.as_posix()} does not contain the required `class Schema(pa.SchemaModel)`")
             ) from e
 
-    def _schema_match_data(self) -> None:
+    def _check_schema_match_data(self) -> None:
         try:
             sys.path.append(self.load_path.parent.as_posix())
             load_module = importlib.import_module(name=self.load_path.stem)

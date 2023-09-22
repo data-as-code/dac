@@ -11,9 +11,9 @@ class PyProjectConfig:
     project_dependencies: str
 
     def __post_init__(self):
-        self._valid_project_name()
+        self.__check_project_name_is_valid()
 
-    def _valid_project_name(self) -> None:
+    def __check_project_name_is_valid(self) -> None:
         if not self.project_name.isidentifier() or "\xb7" in self.project_name:
             raise ValueError(f"Invalid project name: {self.project_name} (hint: only '_' are allowed, no '-')")
 
