@@ -10,6 +10,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Anything MAY change at any time. The public API SHOULD NOT be considered stable.").
 While in this phase, we will denote breaking changes with a minor increase.
 
+## Unreleased
+
+### Changed
+
+* `dac` does not rely on [`pydantic`](https://pypi.org/project/pydantic/) anymore, and uses [`dataclass`](https://docs.python.org/3/library/dataclasses.html#) instead.
+  Changes affect `PackConfig` and `PyProjectConfig`.
+
 ## 0.3.3
 
 ### Fixed

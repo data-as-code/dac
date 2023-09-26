@@ -12,8 +12,6 @@ from test.data import (
 )
 
 import pytest
-from pydantic import ValidationError
-
 from dac._input.config import PackConfig
 from dac._input.pyproject import PyProjectConfig
 
@@ -31,7 +29,7 @@ def test_if_all_valid_then_not_exceptions(pyproject: PyProjectConfig):
 
 def test_if_invalid_data_path_then_raise_exception(pyproject: PyProjectConfig):
     with TemporaryDirectory() as tmp_dir:
-        with pytest.raises(ValidationError):
+        with pytest.raises(ValueError):
             PackConfig(
                 data_path=Path("invalid/path"),
                 load_path=get_path_to_sample_load_parquet_as_pandas(),
@@ -43,7 +41,7 @@ def test_if_invalid_data_path_then_raise_exception(pyproject: PyProjectConfig):
 
 def test_if_invalid_wheel_dir_then_raise_exception(pyproject: PyProjectConfig):
     with NamedTemporaryFile() as tmp_file:
-        with pytest.raises(ValidationError):
+        with pytest.raises(ValueError):
             PackConfig(
                 data_path=Path(tmp_file.name),
                 load_path=get_path_to_sample_load_parquet_as_pandas(),
@@ -55,7 +53,7 @@ def test_if_invalid_wheel_dir_then_raise_exception(pyproject: PyProjectConfig):
 
 def test_if_invalid_load_path_then_raise_exception(pyproject: PyProjectConfig):
     with TemporaryDirectory() as tmp_dir:
-        with pytest.raises(ValidationError):
+        with pytest.raises(ValueError):
             PackConfig(
                 data_path=get_path_to_sample_parquet(),
                 load_path=Path("invalid/path"),
@@ -67,7 +65,7 @@ def test_if_invalid_load_path_then_raise_exception(pyproject: PyProjectConfig):
 
 def test_if_load_does_not_contain_expected_function_then_raise_exception(pyproject: PyProjectConfig):
     with TemporaryDirectory() as tmp_dir:
-        with pytest.raises(ValidationError):
+        with pytest.raises(ValueError):
             PackConfig(
                 data_path=get_path_to_sample_parquet(),
                 load_path=get_path_to_invalid_load(),
@@ -79,7 +77,7 @@ def test_if_load_does_not_contain_expected_function_then_raise_exception(pyproje
 
 def test_if_invalid_schema_path_then_raise_exception(pyproject: PyProjectConfig):
     with TemporaryDirectory() as tmp_dir:
-        with pytest.raises(ValidationError):
+        with pytest.raises(ValueError):
             PackConfig(
                 data_path=get_path_to_sample_parquet(),
                 load_path=get_path_to_sample_load_parquet_as_pandas(),
@@ -91,7 +89,7 @@ def test_if_invalid_schema_path_then_raise_exception(pyproject: PyProjectConfig)
 
 def test_if_schema_does_not_contain_expected_class_then_raise_exception(pyproject: PyProjectConfig):
     with TemporaryDirectory() as tmp_dir:
-        with pytest.raises(ValidationError):
+        with pytest.raises(ValueError):
             PackConfig(
                 data_path=get_path_to_sample_parquet(),
                 load_path=get_path_to_sample_load_parquet_as_pandas(),
@@ -113,7 +111,7 @@ def test_if_data_path_is_not_provided_then_do_not_raise_exception(pyproject: PyP
 
 def test_if_schema_does_not_match_data_then_raise_exception(pyproject: PyProjectConfig):
     with TemporaryDirectory() as tmp_dir:
-        with pytest.raises(ValidationError):
+        with pytest.raises(ValueError):
             PackConfig(
                 data_path=get_path_to_sample_parquet(),
                 load_path=get_path_to_sample_load_parquet_as_pandas(),
