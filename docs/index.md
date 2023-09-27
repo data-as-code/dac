@@ -10,7 +10,6 @@ Data-as-Code (DaC) `dac` is a tool that supports the distribution of data as (py
   <img src="img/logo.jpg" alt="drawing" width="250"/>
 </div>
 
-
 ## How will the Data Scientists use a DaC package?
 
 Say that the Data Engineers prepared the `demo-data` as code for you. Then you will install the code in your environment
@@ -36,12 +35,11 @@ With the schema you can, for example
 * access the column names (e.g. `Schema.my_column`)
 * unit test your functions by [synthetizining data](https://pandera.readthedocs.io/en/stable/data_synthesis_strategies.html)
 
-
 ## How can a Data Engineer provide a DaC python package?
 
 Install this library
 ```sh
-python -m pip install edg-dac
+python -m pip install dac
 ```
 and use the command `dac pack` (run `dac pack --help` for detailed instructions).
 
@@ -50,7 +48,6 @@ On a high level, the most important elements you must provide are:
 * python code to load the data. It should as a DataFrame in one of the supported libraries: [pandas](https://pandas.pydata.org/), [dask](https://www.dask.org/), [pyspark](https://spark.apache.org/docs/latest/api/python/index.html), or [modin](https://github.com/modin-project/modin)
 * a [pandera ModelSchema](https://pandera.readthedocs.io/en/stable/schema_models.html) fitting the data that can be loaded
 * python dependencies
-
 
 ## What are the advantages of distributing data in this way?
 
@@ -63,9 +60,9 @@ On a high level, the most important elements you must provide are:
 
 * Semantic versioning can be used to communicate significat changes:
 
-    * a patch update corresponds to a fix in the data: its intended content is unchanged
-    * a minor update corresponds to a change in the data that does not break the schema
-    * a major update corresponds to a change in the schema, or any other breaking change
+  * a patch update corresponds to a fix in the data: its intended content is unchanged
+  * a minor update corresponds to a change in the data that does not break the schema
+  * a major update corresponds to a change in the schema, or any other breaking change
 
   In this way data pipelines can subscribe to the appropriate updates. Furthermore, it will be easy to keep releasing data updates maintaining retro-compatibility (one can keep deploying `1.X.Y` updates even after version `2` has been rolled-out).
 
