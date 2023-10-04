@@ -1,4 +1,4 @@
-iport pandera as pa
+iport pandera as pa # noqa: E999
 from pandera.typing import Series
 
 
