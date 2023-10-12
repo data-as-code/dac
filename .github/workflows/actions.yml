@@ -32,7 +32,7 @@ jobs:
         pre-commit install
     - name: Run pre-commit 👗🚀
       run: |
-        pre-commit run
+        pre-commit run --all-files
 
   test:
     runs-on: "${{ matrix.os }}"
