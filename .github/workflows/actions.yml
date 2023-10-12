@@ -33,6 +33,7 @@ jobs:
     - name: Run pre-commit 👗🚀
       run: |
         pre-commit run
+        pre-commit run --all-files markdown-link-check
 
   test:
     runs-on: "${{ matrix.os }}"
