@@ -41,6 +41,10 @@ def get_path_to_sample_schema() -> Path:
     return Path(__file__).parent / "schema/sample.py"
 
 
+def get_path_to_sample_custom_schema() -> Path:
+    return Path(__file__).parent / "schema/sample_custom.py"
+
+
 def get_path_to_invalid_schema() -> Path:
     return Path(__file__).parent / "schema/invalid.py"
 

@@ -8,6 +8,7 @@ from test.cli_utilities import invoke_dac_pack_from_config
 from test.data import (
     generate_random_project_name,
     get_path_to_parquet_as_pandas_requirements,
+    get_path_to_sample_custom_schema,
     get_path_to_sample_load_parquet_as_pandas,
     get_path_to_sample_parquet,
     get_path_to_sample_schema,
@@ -22,13 +23,18 @@ from typing import Generator, Optional
 import pandas as pd
 import pandera as pa
 import pytest
-
 from dac import PackConfig, PyProjectConfig
 
 
 @pytest.mark.slow
-def test_if_valid_input_then_create_python_wheel():
+def test_if_valid_input_with_pandera_schema_then_create_python_wheel():
     with _packed_data() as config:
+        _verify_wheel(wheel_dir=Path(config.wheel_dir), pyproject=config.pyproject)
+
+
+@pytest.mark.slow
+def test_if_valid_input_with_custom_schema_then_create_python_wheel():
+    with _packed_data(schema_path=get_path_to_sample_custom_schema()) as config:
         _verify_wheel(wheel_dir=Path(config.wheel_dir), pyproject=config.pyproject)
 
 
