@@ -5,9 +5,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
 
-import pandera as pa
-
 from dac._file_helper import temporarily_copied_file
+from dac._input.interface import Validator
 from dac._input.pyproject import PyProjectConfig
 
 
@@ -65,7 +64,7 @@ class PackConfig:
             ) from e
 
         try:
-            issubclass(pkg.Schema, pa.SchemaModel)
+            issubclass(pkg.Schema, Validator)
         except Exception as e:
             raise ValueError(
                 (f"{self.schema_path.as_posix()} does not contain the required `class Schema(pa.SchemaModel)`")
@@ -99,9 +98,5 @@ class PackConfig:
 
         try:
             schema_module.Schema.validate(data, lazy=True)
-        except pa.errors.SchemaErrors as e:
-            raise ValueError("Validation of the schema against the data has failed:" "\n" f"{e.failure_cases}") from e
         except Exception as e:
-            raise ValueError(
-                "Validation of the schema against the data has failed for unexpected reasons:" "\n" f"{e}"
-            ) from e
+            raise ValueError("Validation of the schema against the data has failed:" "\n" f"{e}") from e

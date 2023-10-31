@@ -23,17 +23,17 @@ from demo_data import load
 data = load()
 ```
 
-Depending on how the data was prepared, load may return a [pandas](https://pandas.pydata.org/), [dask](https://www.dask.org/), [pyspark](https://spark.apache.org/docs/latest/api/python/index.html), or [modin](https://github.com/modin-project/modin) dataframe. The limited choice is due to the fact that it must be supported by [pandera](https://pandera.readthedocs.io/en/stable/).
+Data can be in any format. There is no constraint of any kind.
 
-Not only accessing data will be this easy, but you will also have the [pandera DataFrame Model](https://pandera.readthedocs.io/en/stable/dataframe_models.html) associated with the data. How?
+Not only accessing data will be this easy but, depending on how data were prepared, you may also have access to useful metadata. How?
 ```python
 from demo_data import Schema
 ```
 
-With the schema you can, for example
+With the schema you could, for example
 
 * access the column names (e.g. `Schema.my_column`)
-* unit test your functions by [synthetizining data](https://pandera.readthedocs.io/en/stable/data_synthesis_strategies.html)
+* unit test your functions by getting a data example with `Schema.example()`
 
 ## How can a Data Engineer provide a DaC python package?
 
@@ -45,20 +45,29 @@ and use the command `dac pack` (run `dac pack --help` for detailed instructions)
 
 On a high level, the most important elements you must provide are:
 
-* python code to load the data. It should as a DataFrame in one of the supported libraries: [pandas](https://pandas.pydata.org/), [dask](https://www.dask.org/), [pyspark](https://spark.apache.org/docs/latest/api/python/index.html), or [modin](https://github.com/modin-project/modin)
-* a [pandera DataFrame Model](https://pandera.readthedocs.io/en/stable/dataframe_models.html) fitting the data that can be loaded
+* python code to load the data
+* a `Schema` class that at very least contains a `validate` method, but possibly also
+
+    - data field names (column names, if data is tabular)
+    - an `example` method
+
 * python dependencies
+
+!!! hint "Use `pandera` to define the Schema"
+
+    If the data type you are using is supported by [`pandera`](https://pandera.readthedocs.io/en/stable/index.html) consider  using a [`DataFrameModel`](https://pandera.readthedocs.io/en/stable/dataframe_models.html) to define the Schema.
+
 
 ## What are the advantages of distributing data in this way?
 
 * The code needed to load the data, the data source, and locations are abstracted away from the user.
   This mean that the data engineer can start from local files, transition to SQL database, cloud file storage, or kafka topic, without having the user to notice it or need to adapt its code.
 
-* Column names are passed to the user, and can be abstracted from the data source leveraging on the pandera  [`Field.alias`](https://pandera.readthedocs.io/en/stable/reference/generated/pandera.api.pandas.model_components.Field.html). In this way, the user code will not contain hard-coded column names, and changes in data source column names won't impact the user.
+* *If you provide data field names in `Schema`* (e.g. `Schema.column_1`), the user code will not contain hard-coded column names, and changes in data source field names won't impact the user.
 
-* Users can build robust code by [writing unit testing for their functions](https://pandera.readthedocs.io/en/stable/data_synthesis_strategies.html) effortlessly.
+* *If you provide the `Schema.example` method*, users will be able to build robust code by writing unit testing for their functions effortlessly.
 
-* Semantic versioning can be used to communicate significat changes:
+* Semantic versioning can be used to communicate significant changes:
 
   * a patch update corresponds to a fix in the data: its intended content is unchanged
   * a minor update corresponds to a change in the data that does not break the schema
