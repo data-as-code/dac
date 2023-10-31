@@ -25,8 +25,8 @@ def test_if_project_init_is_inspected_then_load_and_schema_is_found():
     with input_with_self_contained_data() as config:
         with data_as_code_project(config=config) as proj_dir:
             init_content = (proj_dir / "src" / config.pyproject.project_name / "__init__.py").read_text()
-            assert f"from {config.pyproject.project_name}._load import load" in init_content
-            assert f"from {config.pyproject.project_name}._schema import Schema" in init_content
+            assert f"from {config.pyproject.project_name}.load import load" in init_content
+            assert f"from {config.pyproject.project_name}.schema import Schema" in init_content
 
 
 def test_if_project_load_is_inspected_then_has_same_content_as_original():
