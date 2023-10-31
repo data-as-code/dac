@@ -45,7 +45,7 @@ class PackConfig:
 
         try:
             signature = inspect.getfullargspec(pkg.load)
-            assert signature.args == []
+            assert len(signature.args) == (len(signature.defaults) if signature.defaults is not None else 0)
         except Exception as e:
             raise ValueError((f"{self.load_path.as_posix()} does not contain the required `def load()`")) from e
 

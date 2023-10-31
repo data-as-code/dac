@@ -17,6 +17,14 @@ def get_path_to_sample_load_parquet_as_pandas() -> Path:
     return Path(__file__).parent / "load/parquet_as_pandas.py"
 
 
+def get_path_to_sample_load_parquet_as_pandas_with_sample_frac() -> Path:
+    return Path(__file__).parent / "load/parquet_as_pandas_with_sample_frac.py"
+
+
+def get_path_to_sample_load_parquet_as_pandas_with_sample_n() -> Path:
+    return Path(__file__).parent / "load/parquet_as_pandas_with_sample_n.py"
+
+
 def get_path_to_self_contained_load_as_pandas() -> Path:
     return Path(__file__).parent / "load/self_contained_as_pandas.py"
 
