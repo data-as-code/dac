@@ -3,8 +3,8 @@ from pathlib import Path
 
 
 class DaCProjectFactory:
-    load_file_name = "_load.py"
-    schema_file_name = "_schema.py"
+    load_file_name = "load.py"
+    schema_file_name = "schema.py"
 
     def __init__(self, project_dir: Path, load_path: Path, schema_path: Path, project_name: str, pyproject_toml: str):
         self._project_dir = project_dir
