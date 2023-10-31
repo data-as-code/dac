@@ -4,6 +4,8 @@ from test.data import (
     get_path_to_invalid_load,
     get_path_to_invalid_schema,
     get_path_to_sample_load_parquet_as_pandas,
+    get_path_to_sample_load_parquet_as_pandas_with_sample_frac,
+    get_path_to_sample_load_parquet_as_pandas_with_sample_n,
     get_path_to_sample_parquet,
     get_path_to_sample_schema,
     get_path_to_schema_incompatible_with_sample_df,
@@ -69,6 +71,29 @@ def test_if_load_does_not_contain_expected_function_then_raise_exception(pyproje
             PackConfig(
                 data_path=get_path_to_sample_parquet(),
                 load_path=get_path_to_invalid_load(),
+                schema_path=get_path_to_sample_schema(),
+                wheel_dir=Path(tmp_dir),
+                pyproject=pyproject,
+            )
+
+
+def test_if_load_contain_optional_arguments_then_do_not_raise_exception(pyproject: PyProjectConfig):
+    with TemporaryDirectory() as tmp_dir:
+        PackConfig(
+            data_path=get_path_to_sample_parquet(),
+            load_path=get_path_to_sample_load_parquet_as_pandas_with_sample_frac(),
+            schema_path=get_path_to_sample_schema(),
+            wheel_dir=Path(tmp_dir),
+            pyproject=pyproject,
+        )
+
+
+def test_if_load_contain_non_optional_arguments_then_raise_exception(pyproject: PyProjectConfig):
+    with TemporaryDirectory() as tmp_dir:
+        with pytest.raises(ValueError):
+            PackConfig(
+                data_path=get_path_to_sample_parquet(),
+                load_path=get_path_to_sample_load_parquet_as_pandas_with_sample_n(),
                 schema_path=get_path_to_sample_schema(),
                 wheel_dir=Path(tmp_dir),
                 pyproject=pyproject,

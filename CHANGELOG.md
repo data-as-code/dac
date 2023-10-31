@@ -10,14 +10,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Anything MAY change at any time. The public API SHOULD NOT be considered stable.").
 While in this phase, we will denote breaking changes with a minor increase.
 
-## Unreleased patch
+## 0.4.0
 
 ### Changed
 
+* The `load` function in `load.py` can contain optional arguments. Previously no arguments were allowed.
+* `load.py` and `schema.py` are publicly accessible under `dac_pkg_name.load` and `dac_pkg_name.schema` respectively. Previously they were marked as private modules, under `dac_pkg_name._load` and `dac_pkg_name._schema`.
+* `Schema` does not have to be a `pandera.DataFrameModel` anymore, but any class that implements a `validate` method (see the `_input.interface.Validator` protocol).
 * `dac` does not rely on [`pydantic`](https://pypi.org/project/pydantic/) anymore, and uses [`dataclass`](https://docs.python.org/3/library/dataclasses.html#) instead.
   Changes affect `PackConfig` and `PyProjectConfig`.
-* `Schema` does not have to be a `pandera.DataFrameModel` anymore, but any class that implements a `validate` method (see the `_input.interface.Validator` protocol).
-* `load.py` and `schema.py` are publicly accessible under `dac_pkg_name.load` and `dac_pkg_name.schema` respectively. Previously they were marked as private modules, under `dac_pkg_name._load` and `dac_pkg_name._schema`.
 
 ## 0.3.3
 
