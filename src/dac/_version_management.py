@@ -25,5 +25,5 @@ def find_latest_version(pkg_name: str, major: Optional[int] = None) -> str:
 
 def increase_minor(version: str) -> str:
     major, minor, patch = version.split(".")
-    assert major.isdigit() and minor.isdigit() and patch.isdigit()
+    assert major.isdigit() and minor.isdigit()
     return f"{major}.{int(minor) + 1}.0"
