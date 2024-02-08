@@ -10,6 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Anything MAY change at any time. The public API SHOULD NOT be considered stable.").
 While in this phase, we will denote breaking changes with a minor increase.
 
+## 0.4.1
+
+### Added
+
+* Introduce `dac next-version` command, that allows to find the next minor release for a given python package and (optionally) a given major version.
+
 ## 0.4.0
 
 ### Changed

@@ -2,6 +2,7 @@ import platform
 import sys
 from importlib.metadata import requires, version
 from pathlib import Path
+from typing import Optional
 
 import typer
 from rich.console import Console
@@ -11,6 +12,7 @@ import dac
 from dac._input.config import PackConfig
 from dac._input.pyproject import PyProjectConfig
 from dac._packing import pack as py_api_pack
+from dac._version_management import find_latest_version, increase_minor
 
 app = typer.Typer()
 console = Console()
@@ -67,6 +69,30 @@ def pack(
             ),
         ),
     )
+
+
+@app.command()
+def next_version(
+    pkg_name: str = typer.Option(
+        ...,
+        help="Name of the python package",
+    ),
+    major: Optional[int] = typer.Option(
+        None,
+        "--major",
+        help="Major of the version that should be increased. "
+        "If not specified just take it from the latest version of the package.",
+    ),
+):
+    """
+    Print the next version of the python package.
+
+    It assumes that semantic versioning (https://semver.org) is used,
+    and that the next version corresponds to a minor upgrade.
+    """
+    latest_version = find_latest_version(pkg_name=pkg_name, major=major)
+    next_version = increase_minor(version=latest_version)
+    console.print(next_version)
 
 
 @app.command()

@@ -8,10 +8,9 @@ from test.data import (
 from typing import Optional
 
 from click.testing import Result
-from typer.testing import CliRunner
-
 from dac._cli import app
 from dac._input.config import PackConfig
+from typer.testing import CliRunner
 
 runner = CliRunner()
 
@@ -63,6 +62,17 @@ def invoke_dac_pack_from_config(config: PackConfig) -> Result:
         pkg_name=config.pyproject.project_name,
         pkg_version=config.pyproject.project_version,
         pkg_dependencies=config.pyproject.project_dependencies,
+    )
+
+
+def invoke_dac_next_version(
+    pkg_name: str,
+    major: Optional[int] = None,
+) -> Result:
+    major_option = [] if major is None else ["--major", str(major)]
+    return runner.invoke(
+        app,
+        ["next-version", "--pkg-name", pkg_name] + major_option,
     )
 
 
