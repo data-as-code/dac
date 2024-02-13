@@ -10,6 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Anything MAY change at any time. The public API SHOULD NOT be considered stable.").
 While in this phase, we will denote breaking changes with a minor increase.
 
+## 0.4.2
+
+### Fixed
+
+* `dac next-version` is able to find the existing version of a package irrespectively of the use of `-` or `_` as a separator.
+
 ## 0.4.1
 
 ### Added

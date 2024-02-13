@@ -16,9 +16,10 @@ def find_latest_version(pkg_name: str, major: Optional[int] = None) -> str:
         ],
         stderr=subprocess.DEVNULL,
     )
-    last_line = output.decode("utf-8").splitlines()[-1]
+    output_lines = output.decode("utf-8").splitlines()
+    would_install_line = [line for line in output_lines if "Would install" in line][0]
     regex_rule = f"{pkg_name.replace('_', '-')}-{major if major is not None else ''}.[^ ]+"
-    match = re.search(regex_rule, last_line)
+    match = re.search(regex_rule, would_install_line.replace("_", "-"))
     assert match is not None
     return match[0][len(f"{pkg_name}-") :]
 
