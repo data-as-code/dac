@@ -89,6 +89,14 @@ def get_sample_pandas_df() -> pd.DataFrame:
     )
 
 
+def get_pip_log_with_dash() -> str:
+    return (Path(__file__).parent / "pip_log" / "log_for_investing_algorithm_framework_with_dash.txt").read_text()
+
+
+def get_pip_log_with_underscore() -> str:
+    return (Path(__file__).parent / "pip_log" / "log_for_investing_algorithm_framework_with_underscore.txt").read_text()
+
+
 def generate_random_project_name() -> str:
     return "".join(random.choice(string.ascii_lowercase) for _ in range(16))
 
