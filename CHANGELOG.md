@@ -14,7 +14,7 @@ While in this phase, we will denote breaking changes with a minor increase.
 
 ### Fixed
 
-* `dac next-version` is able to find the existing version of a package irrespectively of the use of `-` or `-` as a separator.
+* `dac next-version` is able to find the existing version of a package irrespectively of the use of `-` or `_` as a separator.
 
 ## 0.4.1
 
