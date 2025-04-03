@@ -19,6 +19,7 @@ While in this phase, we will denote breaking changes with a minor increase.
   - `toml~=0.10`      -> `toml==0.10.2`
   - `typer[all]~=0.7` -> `typer[all]==0.15.2`
   - `wheel~=0.38`     -> `wheel==0.45.1`
+* Prevent installation with python > `3.11`
 
 ## 0.4.2
 

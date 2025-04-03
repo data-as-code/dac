@@ -3,7 +3,7 @@ name = "dac"
 dynamic = ["version"]
 description = "Tool to distribute data as code"
 readme = "README.md"
-requires-python = ">=3.10,<3.13"
+requires-python = ">=3.9,<3.12"
 license = { text = "MIT" }
 authors = [
     { name = "Francesco Calcavecchia", email = "francesco.calcavecchia@gmail.com" },
