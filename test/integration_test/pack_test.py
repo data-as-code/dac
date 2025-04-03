@@ -4,6 +4,13 @@ from importlib import import_module
 from importlib.metadata import version
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from typing import Generator, Optional
+
+import pandas as pd
+import pandera as pa
+import pytest
+
+from dac import PackConfig, PyProjectConfig
 from test.cli_utilities import invoke_dac_pack_from_config
 from test.data import (
     generate_random_project_name,
@@ -18,12 +25,6 @@ from test.data import (
     get_test_project_version,
 )
 from test.data.load import self_contained_as_pandas
-from typing import Generator, Optional
-
-import pandas as pd
-import pandera as pa
-import pytest
-from dac import PackConfig, PyProjectConfig
 
 
 @pytest.mark.slow
@@ -54,7 +55,7 @@ def test_if_installed_then_can_access_schema():
         files_in_wheel_dir = list(Path(config.wheel_dir).iterdir())
         with _pip_installed_wheel(path=files_in_wheel_dir[0]):
             pkg = import_module(config.pyproject.project_name)
-            assert issubclass(pkg.Schema, pa.SchemaModel)
+            assert issubclass(pkg.Schema, pa.DataFrameModel)
 
 
 @pytest.mark.slow

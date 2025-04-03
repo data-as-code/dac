@@ -1,16 +1,17 @@
 from tempfile import TemporaryDirectory
+from typing import Optional
+
+from click.testing import Result
+from typer.testing import CliRunner
+
+from dac._cli import app
+from dac._input.config import PackConfig
 from test.data import (
     generate_random_project_name,
     get_path_to_self_contained_load_as_pandas,
     get_path_to_self_contained_schema,
     get_test_project_version,
 )
-from typing import Optional
-
-from click.testing import Result
-from dac._cli import app
-from dac._input.config import PackConfig
-from typer.testing import CliRunner
 
 runner = CliRunner()
 

@@ -3,36 +3,35 @@ name: dac actions
 on:
   push:
     branches:
-      - '*'
+      - "*"
     tags:
-      - '*'
+      - "*"
 
 jobs:
-
   check-style:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout 🔖
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 1
-    - name: Setup python 🐍
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.12'
-    - name: Setup cache 💾
-      uses: actions/cache@v3
-      with:
-        path: ~/.cache/pre-commit
-        key: pre-commit
-    - name: Prepare pre-commit 🙆‍♂️👗
-      run: |
-        python -m venv venv || . venv/bin/activate
-        pip install -U pip wheel setuptools pre-commit
-        pre-commit install
-    - name: Run pre-commit 👗🚀
-      run: |
-        pre-commit run --all-files
+      - name: Checkout 🔖
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - name: Setup python 🐍
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+      - name: Setup cache 💾
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit
+      - name: Prepare pre-commit 🙆‍♂️👗
+        run: |
+          python -m venv venv || . venv/bin/activate
+          pip install -U pip wheel setuptools pre-commit
+          pre-commit install
+      - name: Run pre-commit 👗🚀
+        run: |
+          pre-commit run --all-files
 
   test:
     runs-on: "${{ matrix.os }}"
@@ -41,60 +40,60 @@ jobs:
         os: ["ubuntu-latest"]
         version: ["3.9", "3.10", "3.11"]
     steps:
-    - name: Checkout 🔖
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 1
-    - name: Setup python 🐍
-      uses: actions/setup-python@v4
-      with:
-        python-version: "${{ matrix.version }}"
-    - name: Prepare tests 🙆‍♂️🔬
-      run: |
-        python -m venv venv || . venv/bin/activate
-        pip install -U pip wheel setuptools
-        pip install -r requirements-test.txt
-    - name: Run tests 🔬🚀
-      run: |
-        pytest test --run-slow
+      - name: Checkout 🔖
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - name: Setup python 🐍
+        uses: actions/setup-python@v4
+        with:
+          python-version: "${{ matrix.version }}"
+      - name: Prepare tests 🙆‍♂️🔬
+        run: |
+          python -m venv venv || . venv/bin/activate
+          pip install -U pip wheel setuptools
+          pip install -r requirements-test.txt
+      - name: Run tests 🔬🚀
+        run: |
+          pytest test --run-slow
 
   docs:
     needs: [test, check-style]
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout 🔖
-      uses: actions/checkout@v3
-    - name: Deploy docs
-      uses: mhausenblas/mkdocs-deploy-gh-pages@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        CONFIG_FILE: mkdocs.yml
-        REQUIREMENTS: requirements-docs.txt
+      - name: Checkout 🔖
+        uses: actions/checkout@v3
+      - name: Deploy docs
+        uses: mhausenblas/mkdocs-deploy-gh-pages@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CONFIG_FILE: mkdocs.yml
+          REQUIREMENTS: requirements-docs.txt
 
   pypi-release:
     needs: [test, check-style]
     if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') }}
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout 🔖
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 1
-    - name: Setup python 🐍
-      uses: actions/setup-python@v4
-      with:
-        python-version: "3.12"
-    - name: Prepare release 🙆‍♂️📦test
-      run: |
-        python -m venv venv || . venv/bin/activate
-        pip install -U pip wheel setuptools build twine
-    - name: Build 🛠️📦
-      run: |
-        python -m build
-    - name: Release 📦🚀
-      env:
-        TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
-        TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
-      run: |
-        python -m twine upload dist/*
+      - name: Checkout 🔖
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - name: Setup python 🐍
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+      - name: Prepare release 🙆‍♂️📦test
+        run: |
+          python -m venv venv || . venv/bin/activate
+          pip install -U pip wheel setuptools build twine
+      - name: Build 🛠️📦
+        run: |
+          python -m build
+      - name: Release 📦🚀
+        env:
+          TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
+        run: |
+          python -m twine upload dist/*

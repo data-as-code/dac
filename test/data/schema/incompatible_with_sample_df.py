@@ -4,7 +4,7 @@ import pandera as pa
 from pandera.typing import Series
 
 
-class Schema(pa.SchemaModel):
+class Schema(pa.DataFrameModel):
     int1: Series[int] = pa.Field(nullable=False)
     float1: Series[int] = pa.Field()
     string1: Series[float] = pa.Field()

@@ -10,6 +10,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Anything MAY change at any time. The public API SHOULD NOT be considered stable.").
 While in this phase, we will denote breaking changes with a minor increase.
 
+## 0.4.3
+
+### Fixed
+
+* Bump all dependencies to the latest version and introduce necessary adaptation in the source code (affecting only `dac info`):
+  - `build~=0.9`      -> `build==1.2.2`
+  - `toml~=0.10`      -> `toml==0.10.2`
+  - `typer[all]~=0.7` -> `typer[all]==0.15.2`
+  - `wheel~=0.38`     -> `wheel==0.45.1`
+* Prevent installation with python > `3.11`
+
 ## 0.4.2
 
 ### Fixed

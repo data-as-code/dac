@@ -1,7 +1,7 @@
 from importlib.metadata import version
-from test.cli_utilities import invoke_dac_info
 
 import dac
+from test.cli_utilities import invoke_dac_info
 
 
 def test_if_invoke_dac_info_from_shell_then_do_not_raise_error():

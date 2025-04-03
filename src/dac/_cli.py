@@ -1,6 +1,7 @@
 import platform
+import re
 import sys
-from importlib.metadata import requires, version
+from importlib.metadata import PackageNotFoundError, requires, version
 from pathlib import Path
 from typing import Optional
 
@@ -105,8 +106,11 @@ def info():
     requirements = requires(dac.__name__)
     assert requirements is not None
     for r in requirements:
-        lib_name = r.split(" ")[0]
-        table.add_row(lib_name, version(lib_name.split("[")[0]))
+        lib_name = re.match(r"^[a-zA-Z0-9]*", r).group(0)
+        try:
+            table.add_row(lib_name, version(lib_name.split("[")[0]))
+        except PackageNotFoundError as e:
+            table.add_row(lib_name, e.msg)
     table.add_row("python", sys.version)
     table.add_row("platform", platform.platform())
     console.print(table)
