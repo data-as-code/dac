@@ -1,5 +1,11 @@
 from importlib import import_module
 from inspect import signature
+from unittest.mock import MagicMock, patch
+
+import pytest
+from click.testing import Result
+
+from dac._input.config import PackConfig
 from test.cli_utilities import invoke_dac_pack
 from test.data import (
     get_path_to_missing_requirement_load,
@@ -9,11 +15,6 @@ from test.data import (
     get_path_to_wrong_syntax_schema,
 )
 from test.data.pack_input import input_with_local_data, input_with_self_contained_data
-from unittest.mock import MagicMock, patch
-
-import pytest
-from click.testing import Result
-from dac._input.config import PackConfig
 
 
 @pytest.fixture(autouse=True)
@@ -45,11 +46,11 @@ def test_if_data_does_not_match_schema_error_contains_pandera_error_info():
     result = invoke_dac_pack(schema=get_path_to_sample_schema().as_posix())
     assert result.exit_code != 0
     error_message = str(result.exception)
-    assert "schema_context" in error_message
-    assert "check" in error_message
-    assert "failure_case" in error_message
     assert "int1" in error_message
+    assert "float1" in error_message
+    assert "string1" in error_message
     assert "date1" in error_message
+    assert "datetime1" in error_message
 
 
 def test_if_load_requires_missing_requirement_then_error_contains_meaningful_info():

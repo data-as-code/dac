@@ -1,8 +1,8 @@
-from test.data import get_path_to_parquet_as_pandas_requirements
-
 import pytest
 import toml  # type: ignore
+
 from dac._input.pyproject import PyProjectConfig
+from test.data import get_path_to_parquet_as_pandas_requirements
 
 
 @pytest.mark.parametrize("project_name,project_version", [("project_1", "0.1.2"), ("test_project", "6.6.6")])
@@ -35,8 +35,8 @@ def test_if_dependencies_are_passed_from_cat_requirements_then_valid_pyproject_i
     assert parsed_toml["project"]["name"] == pm.project_name
     assert parsed_toml["project"]["version"] == pm.project_version
     assert parsed_toml["project"]["dependencies"] == [
-        "pandas~=1.0",
-        "pandera~=0.13.4",
+        "pandas~=2.0",
+        "pandera~=0.23.1",
         "pyarrow",
     ]
 
