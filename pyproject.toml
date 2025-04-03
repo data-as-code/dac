@@ -3,29 +3,29 @@ name = "dac"
 dynamic = ["version"]
 description = "Tool to distribute data as code"
 readme = "README.md"
-requires-python = ">=3.9,<4"
+requires-python = ">=3.10,<3.13"
 license = { text = "MIT" }
 authors = [
-  { name = "Francesco Calcavecchia", email = "francesco.calcavecchia@gmail.com" },
+    { name = "Francesco Calcavecchia", email = "francesco.calcavecchia@gmail.com" },
 ]
 maintainers = [
-  { name = "Francesco Calcavecchia", email = "francesco.calcavecchia@gmail.com" },
+    { name = "Francesco Calcavecchia", email = "francesco.calcavecchia@gmail.com" },
 ]
 classifiers = [
-  "Programming Language :: Python :: 3",
-  "Development Status :: 3 - Alpha",
-  "Intended Audience :: Developers",
-  "Topic :: Software Development :: Build Tools",
-  "License :: OSI Approved :: MIT License",
-  "Topic :: Scientific/Engineering",
-  "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Build Tools",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Scientific/Engineering",
+    "Operating System :: OS Independent",
 ]
 
 dependencies = [
-  "build==1.2.2",
-  "toml==0.10.2",
-  "typer[all]==0.15.2",
-  "wheel==0.45.1",
+    "build==1.2.2",
+    "toml==0.10.2",
+    "typer[all]==0.15.2",
+    "wheel==0.45.1",
 ]
 
 # [project.optional-dependencies]
