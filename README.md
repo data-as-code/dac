@@ -1,21 +1,26 @@
-<div align="center">
-  <img src="https://data-as-code.github.io/dac/img/motto.png" width="450"/>
-</div>
+# `dac`: A CLI Helper Tool for Data as Code
 
-# `dac`: Data as Code
+[Data as Code](https://data-as-code.github.io/docs/) (DaC) is a paradigm of distributing versioned data as code.
 
-Data-as-Code (DaC) `dac` is a tool that supports the distribution of data as (python) code.
-
-<div align="center">
-  <img src="https://data-as-code.github.io/dac/img/logo.jpg" width="250"/>
-</div>
+`dac` is a tool that [supports the Producer](https://data-as-code.github.io/docs/#3-use-the-dac-cli-tool).
 
 **IMPORTANT**: Currently the project is in the initial development phase, this is why releases are marked as `0.z.y`.
 (following [semantic versioning 2.0.0](https://semver.org/): "Major version zero (0.y.z) is for initial development.
 Anything MAY change at any time. The public API SHOULD NOT be considered stable.").
 While in this phase, we will denote breaking changes with a minor increase.
 
-## 📔 [User documentation](https://data-as-code.github.io/dac/)
+## Quickstart
+
+You can install `dac` as a regular python package
+
+```sh
+python -m pip install dac
+```
+
+Then use the integrated help to find out its functionalities
+```sh
+dac --help
+```
 
 ## Setup development environment (for contributors only)
 
