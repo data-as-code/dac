@@ -32,7 +32,7 @@ def test_if_project_init_is_inspected_then_load_and_schema_is_found():
 def test_if_project_load_is_inspected_then_has_same_content_as_original():
     with input_with_self_contained_data() as config:
         with data_as_code_project(config=config) as proj_dir:
-            project_load_path = proj_dir / "src" / config.pyproject.project_name / f"{DaCProjectFactory.load_file_name}"
+            project_load_path = proj_dir / "src" / config.pyproject.project_name / str(DaCProjectFactory.load_file_name)
             assert project_load_path.exists()
             assert filecmp.cmp(config.load_path, project_load_path)
 
@@ -41,7 +41,7 @@ def test_if_project_schema_is_inspected_then_has_same_content_as_original():
     with input_with_self_contained_data() as config:
         with data_as_code_project(config=config) as proj_dir:
             project_schema_path = (
-                proj_dir / "src" / config.pyproject.project_name / f"{DaCProjectFactory.schema_file_name}"
+                proj_dir / "src" / config.pyproject.project_name / str(DaCProjectFactory.schema_file_name)
             )
             assert project_schema_path.exists()
             assert filecmp.cmp(config.schema_path, project_schema_path)

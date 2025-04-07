@@ -31,4 +31,4 @@ class PyProjectConfig:
     def _get_list_of_project_dependencies(self) -> List[str]:
         splitted_by_newline = self.project_dependencies.splitlines()
         splitted_by_newline_or_comma = [s for ss in splitted_by_newline for s in ss.split(";")]
-        return sorted(map(lambda x: x.strip(), splitted_by_newline_or_comma))
+        return sorted(map(str.strip, splitted_by_newline_or_comma))
