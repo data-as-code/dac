@@ -4,4 +4,6 @@ import pandas as pd
 
 
 def load() -> pd.DataFrame:
-    return pd.read_parquet(Path(__file__).parent / "sample.parquet")
+    df = pd.read_parquet(Path(__file__).parent / "sample.parquet")
+    df["datetime1"] = df["datetime1"].astype("datetime64[ns]")
+    return df
