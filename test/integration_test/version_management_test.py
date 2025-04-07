@@ -9,7 +9,7 @@ def test_if_find_latest_version_is_called_then_return_latest_version():
 
 
 def test_if_find_latest_version_is_called_with_major_constraint_then_return_latest_major_version():
-    assert "0.25.3" == find_latest_version(pkg_name="pandas", major=0)
+    assert "1.5.3" == find_latest_version(pkg_name="pandas", major=1)
 
 
 def test_if_pkg_does_not_exist_then_find_package_raises_exception():
@@ -23,5 +23,5 @@ def test_if_next_version_without_major_spec_then_return_latest_version_with_mino
 
 
 def test_if_next_version_with_major_spec_then_return_minor_upgrade_for_that_major():
-    result = invoke_dac_next_version(pkg_name="pandas", major=0)
-    assert result.stdout == "0.26.0\n"
+    result = invoke_dac_next_version(pkg_name="pandas", major=1)
+    assert result.stdout == "1.6.0\n"
