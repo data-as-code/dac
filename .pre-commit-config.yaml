@@ -12,19 +12,26 @@ repos:
       - id: check-json
       - id: check-toml
       - id: check-yaml
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.15.0
+  - repo: https://github.com/executablebooks/mdformat
+    rev: 0.7.22
     hooks:
-      - id: mypy
-        exclude: test/data/schema/wrong_syntax.py
-  - repo: https://github.com/dosisod/refurb
-    rev: v2.0.0
-    hooks:
-      - id: refurb
-        exclude: test/data/schema/wrong_syntax.py
+      - id: mdformat
+        args: ["--wrap", "120"]
+        additional_dependencies:
+          - mdformat-tables
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.11.4
     hooks:
     - id: ruff
       args: [--fix, --exit-non-zero-on-fix]
       exclude: test/data/schema/wrong_syntax.py
+  - repo: https://github.com/dosisod/refurb
+    rev: v2.0.0
+    hooks:
+      - id: refurb
+        exclude: test/data/schema/wrong_syntax.py
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.15.0
+    hooks:
+      - id: mypy
+        exclude: test/data/schema/wrong_syntax.py

@@ -6,8 +6,8 @@
 
 **IMPORTANT**: Currently the project is in the initial development phase, this is why releases are marked as `0.z.y`.
 (following [semantic versioning 2.0.0](https://semver.org/): "Major version zero (0.y.z) is for initial development.
-Anything MAY change at any time. The public API SHOULD NOT be considered stable.").
-While in this phase, we will denote breaking changes with a minor increase.
+Anything MAY change at any time. The public API SHOULD NOT be considered stable."). While in this phase, we will denote
+breaking changes with a minor increase.
 
 ## Quickstart
 
@@ -18,33 +18,37 @@ python -m pip install dac
 ```
 
 Then use the integrated help to find out its functionalities
+
 ```sh
 dac --help
 ```
 
+If you want to see a usage example, you can have a look at how `dac` is used to build the `dac-example-energy` DaC
+python package [here](https://gitlab.com/data-as-code/energy-dac-example) (look at `.gitlab-ci.yml`).
+
 ## Setup development environment (for contributors only)
 
-* Create a virtual environment and activate it
+- Create a virtual environment and activate it
 
   ```shell
   python -m venv venv
   . venv/bin/activate
   ```
 
-* Install the developer dependencies
+- Install the developer dependencies
 
   ```shell
   python -m pip install -U pip wheel setuptools
   python -m pip install -r requirements-dev.txt
   ```
 
-* Enable the pre-commits
+- Enable the pre-commits
 
   ```shell
   pre-commit install
   ```
 
-* To run all the tests
+- To run all the tests
 
   ```shell
   pytest --run-slow
