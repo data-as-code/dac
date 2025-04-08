@@ -58,6 +58,21 @@ def pack(
     """
     Build a Data as Code (DaC) python wheel after verifying that data
     can be loaded and that data respect the provided schema.
+
+    This command should be used in a python environment that contains
+    all the dependencies needed to load the data and to validate the schema.
+
+    This means that before running this command, you should run something like:
+
+    ```sh
+
+    python -m venv venv && . venv/bin/activate
+    python -m pip install dac -r requirements.txt
+
+    ```
+
+    where the `requirements.txt` file is the same that you are going to provide
+    in the `--dependencies` argument.
     """
     py_api_pack(
         config=PackConfig(
