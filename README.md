@@ -23,8 +23,15 @@ Then use the integrated help to find out its functionalities
 dac --help
 ```
 
+### `dac pack`
+
+This command allows you to build a Data as Code Python package.
+
 If you want to see a usage example, you can have a look at how `dac` is used to build the `dac-example-energy` DaC
 python package [here](https://gitlab.com/data-as-code/energy-dac-example) (look at `.gitlab-ci.yml`).
+
+Consider that there are alternative ways to build a Data as Code package. To know more, consult
+[this page](https://data-as-code.github.io/docs/#producer-data-engineer)
 
 ## Setup development environment (for contributors only)
 
