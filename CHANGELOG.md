@@ -14,16 +14,16 @@ While in this phase, we will denote breaking changes with a minor increase.
 
 ### Added
 
-* Added support for python `3.12`
+* Added support for python `3.12` and `3.13`
 
 ### Changed
 
 * Bump all dependencies to the latest version and introduce necessary adaptation in the source code (affecting only `dac info`):
-  - `build~=0.9`      -> `build==1.2.2`
-  - `toml~=0.10`      -> `toml==0.10.2`
-  - `typer[all]~=0.7` -> `typer[all]==0.15.2`
-  - `wheel~=0.38`     -> `wheel==0.45.1`
-* Prevent installation with python > `3.12`
+  * `build~=0.9`      -> `build~=1.2`
+  * `toml~=0.10`      -> `toml~=0.10.2`
+  * `typer[all]~=0.7` -> `typer~=0.15.2`
+  * `wheel~=0.38`     -> `wheel~=0.45`
+* Prevent installation with python > `3.13`
 
 ## 0.4.2
 
